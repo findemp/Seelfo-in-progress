@@ -1,140 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seelfo - Coming Soon</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: white;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .container {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .logo-container {
-            margin-bottom: 2rem;
-        }
-
-        .logo-container img {
-            max-width: 600px;
-            width: 90%;
-            height: auto;
-        }
-
-        .text-container {
-            min-height: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .coming-soon {
-            color: #4a9d5f;
-            font-size: 2.5rem;
-            font-weight: 400;
-            white-space: nowrap;
-            border-right: 3px solid #4a9d5f;
-            padding-right: 5px;
-            animation: blink 0.75s step-end infinite;
-        }
-
-        @keyframes blink {
-            50% {
-                border-color: transparent;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .coming-soon {
-                font-size: 1.8rem;
-            }
-
-            .logo-container img {
-                max-width: 400px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Seelfo — Coming Soon</title>
+  <link rel="icon" type="image/png" href="Temp-logo.png">
+  <link rel="apple-touch-icon" href="Temp-logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@300;400;500;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <div class="logo-container">
-            <img src="Seelfo_logo_page.png" alt="Seelfo Logo">
-        </div>
-        
-        <div class="text-container">
-            <div class="coming-soon"></div>
-        </div>
+
+  <!-- Shared light blobs (student page) -->
+  <div class="bg-blob"></div>
+  <div class="bg-blob-2"></div>
+
+  <!-- ══════════════════════════════════
+       STUDENT VIEW
+  ══════════════════════════════════ -->
+  <div class="view" id="student-view">
+
+    <!-- Logo -->
+    <div class="logo-wrap">
+      <img src="logo-seelfo-png.png" alt="Seelfo" />
     </div>
 
-    <script>
-        const phrases = [
-            "Coming soon...",
-            "Work in progress...",
-            "Building something great...",
-            "Almost ready...",
-            "Stay tuned..."
-        ];
-        
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let isPaused = false;
-        
-        const textElement = document.querySelector('.coming-soon');
-        const typingSpeed = 100;
-        const deletingSpeed = 50;
-        const pauseDuration = 5000;
-        const pauseBeforeDelete = 2000;
-        
-        function type() {
-            const currentPhrase = phrases[phraseIndex];
-            
-            if (isPaused) {
-                setTimeout(type, pauseDuration);
-                isPaused = false;
-                isDeleting = true;
-                return;
-            }
-            
-            if (isDeleting) {
-                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
-                charIndex--;
-                
-                if (charIndex === 0) {
-                    isDeleting = false;
-                    phraseIndex = (phraseIndex + 1) % phrases.length;
-                    setTimeout(type, 500);
-                    return;
-                }
-            } else {
-                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
-                charIndex++;
-                
-                if (charIndex === currentPhrase.length) {
-                    isPaused = true;
-                    setTimeout(type, pauseBeforeDelete);
-                    return;
-                }
-            }
-            
-            setTimeout(type, isDeleting ? deletingSpeed : typingSpeed);
-        }
-        
-        setTimeout(type, 1000);
-    </script>
+    <!-- Hero -->
+    <div class="hero">
+      <h1 class="hero-headline">
+        <span class="static-line">Discover a</span>
+        <span class="static-line"><span class="headline-bold">new way to make money</span>
+        <span class="static-line">that</span></span>
+      </h1>
+      <p class="typewriter-row">
+        <span class="completion-wrap" id="typewriter"></span>
+      </p>
+      <p class="hero-tagline">
+        Seelfo connects local businesses with students and individuals who have the reach. Then turns that reach into real income.
+      </p>
+    </div>
+
+    <!-- Divider -->
+    <div class="rule">
+      <div class="rule-line"></div>
+      <div class="rule-dot"></div>
+      <div class="rule-line right"></div>
+    </div>
+
+    <!-- Student waitlist -->
+    <div class="waitlist">
+      <p class="waitlist-label">Be the first to know when we go live</p>
+      <div class="waitlist-form" id="waitlistForm">
+        <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="off" />
+        <button onclick="handleWaitlist()">Count me in →</button>
+      </div>
+      <div class="success-msg" id="successMsg">🎉 You're on the list! We'll keep you posted.</div>
+      <p class="waitlist-note">No spam. Just the moment Seelfo goes live.</p>
+    </div>
+
+    <!-- Business CTA -->
+    <div class="biz-strip">
+      <p class="biz-strip-label">Are you a business?</p>
+      <button class="biz-pill" onclick="showBusiness()">
+        <span class="biz-icon">🏪</span>
+        <span>Looking to grow your sales & reach? <strong>Learn more →</strong></span>
+      </button>
+    </div>
+
+    <div class="footer">© 2026 Seelfo. All rights reserved</div>
+
+  </div><!-- /student-view -->
+
+
+  <!-- ══════════════════════════════════
+       BUSINESS VIEW
+  ══════════════════════════════════ -->
+  <div class="view hidden" id="business-view">
+
+    <!-- Dark blobs -->
+    <div class="dark-blob"></div>
+    <div class="dark-blob-2"></div>
+
+    <!-- Back button -->
+    <button class="back-btn" onclick="showStudent()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 5l-7 7 7 7"/>
+      </svg>
+      Back to Seelfo
+    </button>
+
+    <!-- Logo -->
+    <div class="biz-logo-wrap">
+      <img src="logo-seelfo-png.png" alt="Seelfo" />
+    </div>
+
+    <!-- Headline -->
+    <h2 class="biz-headline">
+      Turn existing reach into <span>real customers.</span>
+    </h2>
+
+    <!-- Stat callouts -->
+    <div class="biz-stats">
+      <div class="biz-stat">
+        <div class="biz-stat-value">Targeted Reach</div>
+        <div class="biz-stat-desc">Connect with individuals who already have an engaged local audience, no wasted budget.</div>
+      </div>
+      <div class="biz-stat">
+        <div class="biz-stat-value">Pay for Results</div>
+        <div class="biz-stat-desc">Define what a result looks like, a visit, a lead, a sale. Then only pay when it happens.</div>
+      </div>
+      <div class="biz-stat">
+        <div class="biz-stat-value">Launch in Minutes</div>
+        <div class="biz-stat-desc">Create an effective marketing campaign in collaboration with Seelfo's sellers.</div>
+      </div>
+    </div>
+
+    <!-- Business waitlist -->
+    <div class="biz-waitlist">
+      <p class="biz-waitlist-label">Get early access for your business</p>
+      <div class="biz-form" id="bizForm">
+        <input type="email" id="bizEmailInput" placeholder="business@email.com" autocomplete="off" />
+        <button onclick="handleBizWaitlist()">Get early access →</button>
+      </div>
+      <div class="biz-success" id="bizSuccessMsg">🎉 You're on the list! We'll keep you posted.</div>
+      <p class="biz-note">No spam. Just the moment Seelfo is ready for businesses.</p>
+    </div>
+
+    <div class="footer">© 2026 Seelfo. All rights reserved</div>
+
+  </div><!-- /business-view -->=
+
+  <script src="script.js"></script>
 </body>
 </html>
